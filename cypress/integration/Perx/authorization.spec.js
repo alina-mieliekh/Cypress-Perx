@@ -2,6 +2,12 @@ import campaign from '../../fixtures/campaign.json'
 
 let authorization;
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false
+})
+
 function Login() {
   cy.visit("https://dashboard.perxtech.io/dashboard/signin");
   cy.get("#email").type("reward_admin@dashboard.com");
@@ -10,7 +16,7 @@ function Login() {
   cy.contains("Login").click();
 }
 
-describe("authorization", () => {
+describe("Authorization", () => {
   it("Log in as reward moderator", () => {
     Login();
 
@@ -53,7 +59,7 @@ describe("authorization", () => {
   });
 
   // This test case fails because of the bug.
-  it("Moderator tries to access reports", () => {
+  it("Moderator shouldn't have access to reports", () => {
     Login();
 
     cy.wait(1000);
@@ -63,7 +69,7 @@ describe("authorization", () => {
   });
 
   // This test case fails because of the bug.
-  it("Moderator tries to access rules", () => {
+  it("Moderator shouldn't have access to rules", () => {
     Login();
 
     cy.wait(1000);
@@ -73,7 +79,7 @@ describe("authorization", () => {
   });
 
   // This test case fails because of the bug.
-  it("Moderator tries to access bulkaction", () => {
+  it("Moderator shouldn't have access to bulkaction", () => {
     Login();
 
     cy.wait(1000);
@@ -83,7 +89,7 @@ describe("authorization", () => {
   });
 
   // This test case fails because of the bug.
-  it("Moderator tries to access customers", () => {
+  it("Moderator shouldn't have access to customers", () => {
     Login();
 
     cy.wait(1000);
@@ -92,7 +98,7 @@ describe("authorization", () => {
     cy.contains("403 Forbidden");
   });
 
-  it("Moderator tries to create Campaigns", () => {
+  it("Moderator shouldn't have access to Campaigns", () => {
     Login();
 
     cy.wait(1000);
