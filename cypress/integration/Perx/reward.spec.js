@@ -1,7 +1,3 @@
-const { beforeEach } = require("mocha");
-
-let authorization;
-
 Cypress.on("uncaught:exception", (err, runnable) => {
   // returning false here prevents Cypress from
   // failing the test
@@ -15,6 +11,7 @@ function Login() {
   cy.get("#password").type("reward_admin");
   cy.contains("Login").click();
 }
+
 describe("Reward", () => {
   it("Log in as reward moderator and check permission", () => {
     Login();
@@ -68,11 +65,11 @@ describe("Reward", () => {
     cy.get("body").click();
 
     cy.get(".ant-row:nth-child(9) .ant-form-item-children").click();
-    cy.get("div input[type=checkbox]").click({ multiple: true });
+    cy.get("div input[type=checkbox]").click({multiple: true});
     cy.get("body").click();
 
     cy.get(".ant-row:nth-child(10) .ant-form-item-children").click();
-    cy.get("div input[type=checkbox]").click({ multiple: true });
+    cy.get("div input[type=checkbox]").click({multiple: true});
     cy.get("body").click();
 
     cy.get(".ant-row:nth-child(11) .ant-select").click();
@@ -117,4 +114,3 @@ describe("Reward", () => {
     cy.get('[type="submit"]').click();
   });
 });
-
