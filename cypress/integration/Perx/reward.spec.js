@@ -27,7 +27,7 @@ describe("Reward", () => {
     });
   });
 
-  xit("Check if non-authorized user can access detail/edit pages", () => {
+  it("Check if non-authorized user can access detail/edit pages", () => {
     cy.visit("https://dashboard.perxtech.io/p/rewards/edit/11553");
     cy.wait(1000);
     cy.url().should("match", /signin/);
