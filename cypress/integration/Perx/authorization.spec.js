@@ -1,12 +1,12 @@
-import campaign from '../../fixtures/campaign.json'
+import campaign from "../../fixtures/campaign.json";
 
 let authorization;
 
-Cypress.on('uncaught:exception', (err, runnable) => {
+Cypress.on("uncaught:exception", (err, runnable) => {
   // returning false here prevents Cypress from
   // failing the test
-  return false
-})
+  return false;
+});
 
 function Login() {
   cy.visit("https://dashboard.perxtech.io/dashboard/signin");
@@ -22,8 +22,7 @@ describe("Authorization", () => {
 
     cy.intercept("GET", "https://api.perxtech.io/v4/dash/authorizations").as("authorizations");
 
-    cy.wait("@authorizations")
-    .then((interception) => {
+    cy.wait("@authorizations").then((interception) => {
       expect(interception.response.body.data.permissions.length).to.equal(1);
       expect(interception.response.body.data.permissions[0].resource_name).to.equal("rewards");
       expect(interception.response.body.data.permissions[0].actions[0]).to.equal("view");
